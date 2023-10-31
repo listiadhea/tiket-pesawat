@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikasi Pemesanan Tiket Travel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #0079c1, #005aa7);
+            color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 600px; /* Lebar kontainer untuk layar desktop */
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            border-bottom: 1px solid #0079c1;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0079c1;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #005aa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Aplikasi Pemesanan Tiket Travel</h2>
+        <form id="orderForm">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" required>
+
+            <label for="tujuan">Tujuan:</label>
+            <select id="tujuan">
+                <option value="Jakarta">Jakarta</option>
+                <option value="Surabaya">Surabaya</option>
+                <option value="Bali">Bali</option>
+                <option value="Yogyakarta">Yogyakarta</option>
+            </select>
+
+            <label for="harga">Harga Tiket:</label>
+            <input type="number" id="harga" required>
+
+            <label for="jumlahTiket">Jumlah Tiket:</label>
+            <select id="jumlahTiket">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+
+            <label for="member">Member:</label>
+            <input type="checkbox" id="member">
+
+            <label for="diskon">Diskon (%):</label>
+            <input type="number" id="diskon" value="0">
+
+            <label for="totalBayar">Total Bayar:</label>
+            <input type="text" id="totalBayar" readonly>
+
+            <button type="button" onclick="hitungTotalBayar()">Hitung Total Bayar</button>
+        </form>
+    </div>
+
+    <script>
+        function hitungTotalBayar() {
+            const harga = parseFloat(document.getElementById('harga').value);
+            const jumlahTiket = parseInt(document.getElementById('jumlahTiket').value);
+            const isMember = document.getElementById('member').checked;
+            const diskon = parseFloat(document.getElementById('diskon').value);
+
+            let totalBayar = harga * jumlahTiket;
+
+            if (isMember) {
+                totalBayar *= 0.9; // Diskon 10% untuk member
+            }
+
+            totalBayar -= (totalBayar * (diskon / 100)); // Menghitung diskon dalam persen
+
+            document.getElementById('totalBayar').value = totalBayar.toFixed(2); // Menampilkan total bayar dengan 2 desimal
+        }
+    </script>
+</body>
+</html>
